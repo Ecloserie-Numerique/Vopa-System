@@ -109,8 +109,6 @@ tar -zxvf /var/www/vopa-client.tar.gz
 tar -zxvf /var/www/vopa-server.tar.gz
 rm /var/www/vopa-client.tar.gz
 rm /var/www/vopa-server.tar.gz
-rm -rf /home/pi/vopa-client
-rm -rf /home/pi/vopa-server
 
 
 echo "┌─────────────────────────────────────────"
