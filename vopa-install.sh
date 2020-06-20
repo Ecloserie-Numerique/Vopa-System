@@ -101,10 +101,15 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 apt install nodejs -y
 
 echo "┌─────────────────────────────────────────"
+echo "|Installing Git"
+echo "└─────────────────────────────────────────"
+apt install git -y
+
+echo "┌─────────────────────────────────────────"
 echo "|Copying vopa files"
 echo "└─────────────────────────────────────────"
-wget -r -l1 --no-parent https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client -P /var/www
-wget -r -l1 --no-parent https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server -P /var/www
+git clone https://github.com/Ecloserie-Numerique/Vopa-Client.git /var/www/vopa-client
+git clone https://github.com/Ecloserie-Numerique/Vopa-Server.git /var/www/vopa-server
 
 
 echo "┌─────────────────────────────────────────"
