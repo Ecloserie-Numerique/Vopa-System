@@ -92,7 +92,7 @@ systemctl enable hostapd.service
 echo "┌─────────────────────────────────────────"
 echo "|Installing PHP7"
 echo "└─────────────────────────────────────────"
-apt install php7.3-fpm php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip php7.3-xml -y > /dev/null
+apt install php7.3-fpm php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip php7.3-xml -y
 
 echo "┌─────────────────────────────────────────"
 echo "|Installing NODE.JS"
@@ -103,15 +103,17 @@ apt install nodejs -y
 echo "┌─────────────────────────────────────────"
 echo "|Copying vopa files"
 echo "└─────────────────────────────────────────"
-wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client.tar.gz -O /var/www
-wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server.tar.gz -O /var/www
-tar -zxvf vopa-client.tar.gz
-tar -zxvf vopa-server.tar.gz
+wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client.tar.gz -O /var/www/vopa-client.tar.gz
+wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server.tar.gz -O /var/www/vopa-server.tar.gz
+tar -zxvf /var/www/vopa-client.tar.gz
+tar -zxvf /var/www/vopa-server.tar.gz
+rm /var/www/vopa-client.tar.gz
+rm /var/www/vopa-server.tar.gz
 
 echo "┌─────────────────────────────────────────"
 echo "|Configuring Vopa Server Service"
 echo "└─────────────────────────────────────────"
-wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/server.service -O /lib/systemd/system
+wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/server.service -O /lib/systemd/system/server.service
 systemctl daemon-reload
 systemctl enable server
 
