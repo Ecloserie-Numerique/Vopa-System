@@ -118,6 +118,18 @@ wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master
 systemctl daemon-reload
 systemctl enable server
 
+echo "┌─────────────────────────────────────────"
+echo "|Installing Database"
+echo "└─────────────────────────────────────────"
+apt install mariadb-server -y
+mysql -e "CREATE DATABASE vopa_db;"
+mysql -e "CREATE USER 'vopa_app'@'localhost' IDENTIFIED BY 'vopa_app';"
+mysql -e "GRANT ALL PRIVILIEGES ON vopa_db.* TO 'vopa_app'@'localhost';"
+mysql -e "FLUSH PRIVILEGES;"
+
+wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa.sql -O /home/pi/vopa.sql
+mysql -u vopa_app -p vopa_db < /home/pi/vopa.sql
+
 
 echo "┌─────────────────────────────────────────"
 echo "|Please reboot your pi and test."
