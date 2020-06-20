@@ -103,10 +103,10 @@ apt install nodejs -y
 echo "┌─────────────────────────────────────────"
 echo "|Copying vopa files"
 echo "└─────────────────────────────────────────"
-wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client.tar.gz -O /var/www/vopa-client.tar.gz
-wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server.tar.gz -O /var/www/vopa-server.tar.gz
-tar -zxvf /var/www/vopa-client.tar.gz
-tar -zxvf /var/www/vopa-server.tar.gz
+wget https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client.tar.gz -O /var/www/vopa-client.tar.gz 
+wget https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server.tar.gz -O /var/www/vopa-server.tar.gz 
+tar -zxvf /var/www/vopa-client.tar.gz -C /var/www
+tar -zxvf /var/www/vopa-server.tar.gz -C /var/www
 rm /var/www/vopa-client.tar.gz
 rm /var/www/vopa-server.tar.gz
 
