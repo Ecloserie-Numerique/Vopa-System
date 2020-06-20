@@ -103,12 +103,8 @@ apt install nodejs -y
 echo "┌─────────────────────────────────────────"
 echo "|Copying vopa files"
 echo "└─────────────────────────────────────────"
-wget https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client.tar.gz -O /var/www/vopa-client.tar.gz 
-wget https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server.tar.gz -O /var/www/vopa-server.tar.gz 
-tar -zxvf /var/www/vopa-client.tar.gz -C /var/www
-tar -zxvf /var/www/vopa-server.tar.gz -C /var/www
-rm /var/www/vopa-client.tar.gz
-rm /var/www/vopa-server.tar.gz
+wget -r -l1 --no-parent https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-client -P /var/www
+wget -r -l1 --no-parent https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa-server -P /var/www
 
 
 echo "┌─────────────────────────────────────────"
@@ -130,14 +126,14 @@ echo "Creating User"
 mysql -e "CREATE USER 'vopa_app'@'localhost' IDENTIFIED BY 'vopa_app';"
 
 echo "Adjusting privileges"
-mysql -e "GRANT ALL PRIVILIEGES ON vopa_db.* TO 'vopa_app'@'localhost';"
+mysql -e "GRANT ALL PRIVILEGES ON vopa_db.* TO 'vopa_app'@'localhost';"
 mysql -e "FLUSH PRIVILEGES;"
 
 
 wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/vopa.sql -O /home/pi/vopa.sql
 
 echo "Populating Databse"
-mysql -u vopa_app -p vopa_app vopa_db < /home/pi/vopa.sql
+mysql vopa_db < /home/pi/vopa.sql
 
 
 echo "┌─────────────────────────────────────────"
