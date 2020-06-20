@@ -16,7 +16,7 @@ if [ "$EUID" -ne 0 ]
 	exit
 fi
 
-SSID=${1:-CaptivePortal01}
+SSID=${1:-VOPA LOCAL}
 MODE=${2:-default}
 
 echo "┌─────────────────────────────────────────"
@@ -109,6 +109,9 @@ tar -zxvf /var/www/vopa-client.tar.gz
 tar -zxvf /var/www/vopa-server.tar.gz
 rm /var/www/vopa-client.tar.gz
 rm /var/www/vopa-server.tar.gz
+rm -rf /home/pi/vopa-client
+rm -rf /home/pi/vopa-server
+
 
 echo "┌─────────────────────────────────────────"
 echo "|Configuring Vopa Server Service"
