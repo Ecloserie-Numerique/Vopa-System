@@ -1,12 +1,12 @@
 [Unit]
-Description=Vopa Websockets Server
+Description=Vopa Server
 Documentation=
 After=network.target
 
 [Service]
 Type=simple
 User=pi
-ExecStart=/usr/bin/node /var/www/vopa-server/index.js
+ExecStart=/usr/bin/node /home/pi/vopa-server/server.js
 Restart=on-failure
 
 [Install]
