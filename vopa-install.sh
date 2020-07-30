@@ -34,6 +34,8 @@ systemctl unmask hostapd.service
 systemctl enable hostapd.service
 
 git clone https://github.com/Ecloserie-Numerique/Vopa-Server.git /home/pi/vopa-server
+npm install --prefix /home/pi/vopa-server/
+
 
 wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/server.service -O /lib/systemd/syst$
 systemctl daemon-reload
