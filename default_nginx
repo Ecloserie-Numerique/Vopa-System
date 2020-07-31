@@ -1,6 +1,15 @@
+server_tokens off;
+add_header X-Frame-Options SAMEORIGIN;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection "1; mode=block";
+add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src 'self'; style-src 'self' 'unsafe-inline' http://vopa.local; font-src 'self' 'unsafe-inline' http://vopa.local; frame-src http://vopa.local; object-src 'none'";
+
 server {
         listen 80 default_server;
         server_name  vopa.local;
+
+        # Only allow GET, HEAD, POST https://www.tenable.com/plugins/nessus/43111
+        if ($request_method !~ ^(GET|HEAD|POST)$) { return 444; }
 
 # Redirect requests for /generate_204 to open the captive portal screen
         location /generate_204 {
@@ -24,12 +33,12 @@ server {
 
 # For iOS
        if ($http_user_agent ~* (CaptiveNetworkSupport) ) {
-               return 302 http://vopa.local;
+                return 302 http://vopa.local;
        }
 
 # For others
-
        location / {
-               proxy_pass http://127.0.0.1:3000;
+                proxy_pass http://localhost:3000;
+                #return 302 http://vopa.local/;
        }
 }
