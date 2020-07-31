@@ -12,7 +12,7 @@ echo "┌───────────────────┐"
 echo "| Installing System |"
 echo "└───────────────────┘"
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-apt install nodejs nginx git hostapd dnsmasq iptables-persistent -y
+apt install nodejs nginx git hostapd dnsmasq -y
 
 wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/default_nginx -O /etc/nginx/sites-enabled/default
 wget -q https://raw.githubusercontent.com/Ecloserie-Numerique/Vopa-System/master/dhcpcd.conf -O /etc/dhcpcd.conf
@@ -24,16 +24,18 @@ update-rc.d dnsmasq defaults
 
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 
-iptables -t nat -A PREROUTING -s 10.1.1.0/24 -p tcp --dport 80 -j DNAT --to-destination 10.1.1.1:80
+iptables -t nat -A PREROUTING -s 192.168.24.0/24 -p tcp --dport 80 -j DNAT --to-destination 192.168.24.1:80
 iptables -t nat -A POSTROUTING -j MASQUERADE
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
+apt install iptables-persistent -y
 
 systemctl unmask hostapd.service
 systemctl enable hostapd.service
 
 git clone https://github.com/Ecloserie-Numerique/Vopa-Server.git /home/pi/vopa-server
 npm install --prefix /home/pi/vopa-server/
+chown -R pi:pi /home/pi/vopa-server
 
 systemctl daemon-reload
 systemctl enable server
